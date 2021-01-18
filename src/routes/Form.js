@@ -3,6 +3,7 @@ import { Select, Divider, Input } from 'antd';
 // import { PlusOutlined } from '@ant-design/icons';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
+import Home from '../layout';
 
 const { Option } = Select;
 
@@ -32,29 +33,31 @@ class IndexPage extends React.Component {
   render() {
     const { items, name } = this.state;
     return (
-      <Select
-        style={{ width: 240 }}
-        placeholder="custom dropdown render"
-        dropdownRender={menu => (
-          <div>
-            {menu}
-            <Divider style={{ margin: '4px 0' }} />
-            <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
-              <Input style={{ flex: 'auto' }} value={name} onChange={this.onNameChange} />
-              <a
-                style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
-                onClick={this.addItem}
-              >
-                Add item
-              </a>
+      <Home>
+        <Select
+          style={{ width: 240 }}
+          placeholder="custom dropdown render"
+          dropdownRender={menu => (
+            <div>
+              {menu}
+              <Divider style={{ margin: '4px 0' }} />
+              <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
+                <Input style={{ flex: 'auto' }} value={name} onChange={this.onNameChange} />
+                <a
+                  style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
+                  onClick={this.addItem}
+                >
+                  Add item
+                </a>
+              </div>
             </div>
-          </div>
-        )}
-      >
-        {items.map(item => (
-          <Option key={item}>{item}</Option>
-        ))}
-      </Select>
+          )}
+        >
+          {items.map(item => (
+            <Option key={item}>{item}</Option>
+          ))}
+        </Select>
+      </Home>
     );
   }
 }

@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import request from "../utils/myRequest";
 
 import { Input , Select, Crud, Button, Modal, useCrudController, useModalController, useDatasource} from "tengitsui";
+import Home from '../layout';
+
 const schema = {
     name: {
         type: Input,
@@ -103,7 +105,6 @@ const service = {
 
         });
         const res = await task
-        console.log(111, res)
     },
     add: async params => {
         console.log(params);
@@ -118,7 +119,6 @@ const service = {
         console.log(params);
     },
     testLogin: async ()=>{
-        console.log(111)
         const task = request('/api/users/login', {
             username: 'test',
             password: '123456'
@@ -126,14 +126,13 @@ const service = {
 
         });
         const res = await task
-        console.log(222, res)
     }
 };
 
 
 const SomeDomainView = function ({crud, modal2, test}) {
     return (
-        <>
+        <Home>
             <Crud
                 filter={crud.filter}
                 modal={crud.modal}
@@ -159,7 +158,7 @@ const SomeDomainView = function ({crud, modal2, test}) {
                 }}
             >
             </Modal>
-        </>
+        </Home>
     );
 };
 

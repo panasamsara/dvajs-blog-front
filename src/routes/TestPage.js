@@ -3,6 +3,7 @@ import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import 'antd/dist/antd.css';
+import Home from '../layout';
 
 const originData = [];
 
@@ -156,22 +157,24 @@ const EditableTable = () => {
     };
   });
   return (
-    <Form form={form} component={false}>
-      <Table
-        components={{
-          body: {
-            cell: EditableCell,
-          },
-        }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
-        rowClassName="editable-row"
-        pagination={{
-          onChange: cancel,
-        }}
-      />
-    </Form>
+    <Home>
+      <Form form={form} component={false}>
+        <Table
+          components={{
+            body: {
+              cell: EditableCell,
+            },
+          }}
+          bordered
+          dataSource={data}
+          columns={mergedColumns}
+          rowClassName="editable-row"
+          pagination={{
+            onChange: cancel,
+          }}
+        />
+      </Form>
+    </Home>
   );
 };
 

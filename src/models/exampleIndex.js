@@ -1,9 +1,13 @@
 
 export default {
 
-  namespace: 'example',
+  namespace: 'exampleIndex',
 
-  state: {},
+  state: {
+    users: {
+      name: '张三'
+    }
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line

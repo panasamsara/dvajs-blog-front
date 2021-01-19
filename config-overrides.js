@@ -2,6 +2,7 @@ const {
     override,
     addLessLoader,
     overrideDevServer,
+    addBabelPlugins,
   } = require('customize-cra');
   
   const devServerConfig = () => config => {
@@ -44,20 +45,21 @@ const {
     //   antd: 'antd',
     //   echarts: 'echarts',
     };
-    // config.output.chunkFilename = "VideoCloud_public/static/js/[name].chunk.js";
-    // config.output.filename = "VideoCloud_public/static/js/bundle.js";
-    // try{
-    //   if (process.env.NODE_ENV === "production"){
-    //     config.plugins[5].options.filename = "VideoCloud_public/" + config.plugins[5].options.filename;
-    //     config.plugins[5].options.chunkFilename = "VideoCloud_public/" + config.plugins[5].options.chunkFilename;
-    //     config.plugins[6].opts.fileName="VideoCloud_public/asset-manifest.json";
-    //   }
-    // }catch(e){}
+
     return config;
   };
   const webpackConfig=override(
     rewiredMap(),
     addLessLoader({ javascriptEnabled: true }),
+    addBabelPlugins(
+      // 支持装饰器
+      [
+        '@babel/plugin-proposal-decorators',
+        {
+          legacy: true
+        }
+      ]
+    )
   );
   module.exports = {
     webpack:webpackConfig,

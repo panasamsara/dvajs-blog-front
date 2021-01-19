@@ -8,7 +8,7 @@ function IndexPage({dispatch, exampleIndex}) {
   const [name, setName] = useState(exampleIndex.name)
   useEffect(()=>{ // 监听name变化
     setName(exampleIndex.name)
-  }, exampleIndex.name)
+  }, [exampleIndex.name])
 
   const clickTest = ()=>{ //点击事件 重设model中 name值
     dispatch({type:'exampleIndex/test' , payload: {

@@ -25,7 +25,7 @@ export default function request(url, body){
         credentials: "include",
         headers: {
           Accept: "application/json",
-          Authorization: `${getToken()}`
+        //   Authorization: `${getToken()}`
         }
     };
     const newOptions = { ...defaultOptions, body };

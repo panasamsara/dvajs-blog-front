@@ -10,17 +10,9 @@ const {
       ...config,
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:7001/',// 
+          target: 'http://127.0.0.1:7001/',// 代理
           ws: true,
           changeOrigin: true,
-        },
-        '/base': {
-          target: 'http://129.204.245.148:13026',
-          ws: true,
-        },
-        '/tass': {
-          target: '172.20.91.23:13026',
-          ws: true,
         },
       },
     };

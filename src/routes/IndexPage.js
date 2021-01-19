@@ -2,7 +2,18 @@ import React, {useState, useEffect} from "react";
 import ReactDom from "react-dom";
 import request from "../utils/myRequest";
 
-import { Input , Select, Crud, Button, Modal, useCrudController, useModalController, useDatasource} from "tengitsui";
+import { 
+  Input , 
+  Select, 
+  Crud, 
+  Button, 
+  Modal, 
+  Form,
+  useCrudController, 
+  useModalController, 
+  useFormController,
+} from "tengitsui";
+import { Row, Col, message, DatePicker, Card } from 'antd';
 import Home from '../layout';
 
 const schema = {
@@ -13,10 +24,10 @@ const schema = {
         options: []
     },
     content: {
-        type: Select,
+        type: Input,
         name: "内容",
-        options: [{id:1,name:'aa'},{id:2,name:'bb'}],
-        opts: {showSearch: true}
+        // options: [{id:1,name:'aa'},{id:2,name:'bb'}],
+        // opts: {showSearch: true}
     },
 
     // age: {
@@ -31,66 +42,12 @@ const schema = {
     // }
 };
 
-const columns = {
-    title: {
-        name: "标题"
-    },
-    content: {
-        name: "内容"
-    },
-    id: {
-        name: "操作",
-        render: ({value, record, modal, form, modal2}) => {
-            return (
-                <>
-                    <Button
-                        onClick={() => {
-                          form.setFields(record);
-                          modal.show();
-                        }}
-                    >
-                        编辑
-                    </Button>
-                    <Button
-                        onClick={() => {
-                          form.setFields(record);
-                          modal.show();
-                        }}
-                    >
-                        查看
-                    </Button>
-                </>
-            );
-        }
-    }
-};
-
-const data = {
-    data: [
-        {
-            id: 1,
-            title: "xxx",
-            content: 2,
-        },
-        {
-            id: 2,
-            title: "yyy",
-            content: 3,
-        }
-    ],
-    pagination: {
-        current: 2,
-        pageSize: 10,
-        total: 12
-    }
-};
 
 const service = {
     list: async params => {
         console.log("list", params);
         const task = request('/api/getArticles');
         const res = await task;
-        console.log(222, res)
         return res;
     },
     add: async params => {
@@ -103,21 +60,19 @@ const service = {
         console.log("filter", params);
     },
     submit: async params => {
-        console.log(params);
+        if(params.id){
+          const task = request('/api/updateArticle', {params});
+          const res = await task;
+        }else{
+          const task = request('/api/saveArticle', {params});
+          const res = await task;
+        }
     },
-    testLogin: async ()=>{
-        const task = request('/api/users/login', {
-            username: 'test',
-            password: '123456'
-        }).then(res=>{
 
-        });
-        const res = await task
-    }
 };
 
 
-const SomeDomainView = function ({crud, modal2, test}) {
+const SomeDomainView = function ({crud, modal2, detailData}) {
     return (
         <Home>
             <Crud
@@ -144,46 +99,90 @@ const SomeDomainView = function ({crud, modal2, test}) {
                     modal2.close();
                 }}
             >
+              <div className='modal-set'>
+                <Row>
+                    <Col >
+                        标题：{detailData.title}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        内容：{detailData.content}
+                    </Col>
+                </Row>
+              </div>
             </Modal>
         </Home>
     );
 };
 
-export default function Test() {
-    const crud1 = useCrudController({
-        FilterSchema: schema,
-        FormSchema: schema,
-        ListSchema: columns,
-        service: service
-    });
+export default function Index() {
+  const [detailData, setDetailData] = useState([{}]);
+  const showDetail = (record) => {
+      setDetailData(record)
+  };
+  const columns = {
+    title: {
+        name: "标题"
+    },
+    content: {
+        name: "内容"
+    },
+    id: {
+        name: "操作",
+        render: ({value, record, modal, form, modal2}) => {
+            return (
+                <>
+                    <Button
+                        onClick={() => {
+                          form.setFields(record);
+                          modal.show();
+                        }}
+                    >
+                        编辑
+                    </Button>
+                    <Button
+                        onClick={() => {
+                          modal2.show();
+                          showDetail(record)
+                        }}
+                    >
+                        查看
+                    </Button>
+                </>
+            );
+        }
+    }
+  };
+  []
+  const crud1 = useCrudController({
+      FilterSchema: schema,
+      FormSchema: schema,
+      ListSchema: columns,
+      service: service
+  });
 
+  const modal2 = useModalController({
+          visible: false,
+          loading: false
+  });
+  const editForm = useFormController({
+    schema: schema,
+    doSubmit: service.submit,
+  })
 
-    const modal2 = useModalController({
-            visible: false,
-            loading: false
-    });
-    const {state: options} = useDatasource({
-        service: async () => [
-            {
-                id: 1,
-                name: "电工"
-            },
-            {id: 2, name: "木工"}
-        ]
-    });
+  // 设置options
+  // useEffect(() => {
+  //     schema.type.options = options;
+  // }, [options]);
 
-    // 设置options
-    // useEffect(() => {
-    //     schema.type.options = options;
-    // }, [options]);
+  // 加载list
+  useEffect(() => {
+      crud1.list.doFetch();
+  }, []);
 
-    // 加载list
-    useEffect(() => {
-        crud1.list.doFetch();
-    }, []);
-
-    return (
-        <SomeDomainView crud={crud1}  modal2={modal2} test={123}/>
-    );
+  return (
+      <SomeDomainView crud={crud1}  modal2={modal2} detailData={detailData}/>
+  );
 }
 

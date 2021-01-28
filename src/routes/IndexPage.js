@@ -13,7 +13,7 @@ import {
   useModalController, 
   useFormController,
 } from "tengitsui";
-import { Row, Col, message, DatePicker, Card } from 'antd';
+import { Row, Col, message, DatePicker, Card, Breadcrumb } from 'antd';
 import Home from '../layout';
 
 const schema = {
@@ -75,6 +75,10 @@ const service = {
 const SomeDomainView = function ({crud, modal2, detailData}) {
     return (
         <Home>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>首页</Breadcrumb.Item>
+              {/* <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
+            </Breadcrumb>
             <Crud
                 filter={crud.filter}
                 modal={crud.modal}

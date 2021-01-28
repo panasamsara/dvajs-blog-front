@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Form, Breadcrumb, } from 'antd';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import 'antd/dist/antd.css';
@@ -158,6 +158,10 @@ const EditableTable = () => {
   });
   return (
     <Home>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+        <Breadcrumb.Item>首页</Breadcrumb.Item>
+        <Breadcrumb.Item>test</Breadcrumb.Item>
+      </Breadcrumb>
       <Form form={form} component={false}>
         <Table
           components={{

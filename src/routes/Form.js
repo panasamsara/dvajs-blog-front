@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, Divider, Input } from 'antd';
+import { Select, Divider, Input, Breadcrumb, } from 'antd';
 // import { PlusOutlined } from '@ant-design/icons';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
@@ -34,6 +34,10 @@ class IndexPage extends React.Component {
     const { items, name } = this.state;
     return (
       <Home>
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>首页</Breadcrumb.Item>
+          <Breadcrumb.Item>form</Breadcrumb.Item>
+        </Breadcrumb>
         <Select
           style={{ width: 240 }}
           placeholder="custom dropdown render"

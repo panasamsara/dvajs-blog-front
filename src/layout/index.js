@@ -38,18 +38,14 @@ class SiderDemo extends React.Component {
             <Menu.Item key="sub1" icon={<UserOutlined />} title="User">
               <Link to="/form">form</Link>
             </Menu.Item>
-            <Menu.Item key="9" icon={<FileOutlined />}>
+            {/* <Menu.Item key="9" icon={<FileOutlined />}>
               <Link to="/teng">teng</Link>
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               {this.props.children}
             </div>

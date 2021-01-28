@@ -45,7 +45,7 @@ const schema = {
 
 const service = {
     list: async params => {
-        console.log("list", params);
+        // console.log("list", params);
         const task = request('/api/getArticles');
         const res = await task;
         return res;

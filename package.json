@@ -21,23 +21,26 @@
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",
+    "cssnano": "^4.1.10",
     "eslint": "^7.11.0",
     "eslint-config-umi": "^0.1.1",
     "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.0",
     "eslint-plugin-react": "^7.1.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "husky": "^0.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "react-app-rewired": "^2.1.8",
     "redbox-react": "^1.4.3",
     "roadhog": "^2.5.0-beta.4",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.2",
     "webpack-dev-server": "^3.11.0"
   },
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
       "not op_mini all"
     ],
     "development": [

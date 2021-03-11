@@ -144,7 +144,6 @@ const EditableTable = () => {
     if (!col.editable) {
       return col;
     }
-
     return {
       ...col,
       onCell: (record) => ({
@@ -160,7 +159,7 @@ const EditableTable = () => {
     <Home>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>首页</Breadcrumb.Item>
-        <Breadcrumb.Item>test</Breadcrumb.Item>
+        <Breadcrumb.Item>test1</Breadcrumb.Item>
       </Breadcrumb>
       <Form form={form} component={false}>
         <Table

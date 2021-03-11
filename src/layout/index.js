@@ -15,7 +15,7 @@ const { SubMenu } = Menu;
 class SiderDemo extends React.Component {
   state = {
     collapsed: false,
-    activeKey: ['1']
+    activeKey: '1'
   };
 
   onCollapse = collapsed => {
@@ -24,12 +24,8 @@ class SiderDemo extends React.Component {
   };
 
   menuclick = (val)=>{
-    const {activeKey} = this.state;
-    const arrayCopy = activeKey.slice();  //获取数组的副本
-    arrayCopy[0] = val.key;
-
     this.setState({
-      activeKey: arrayCopy
+      activeKey: val.key
     }, ()=>{
       // console.log(2, this.state.activeKey)
     })
@@ -41,7 +37,7 @@ class SiderDemo extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} selectedKeys={activeKey} mode="inline" onClick={this.menuclick}>
+          <Menu theme="dark" defaultSelectedKeys={['1']} selectedKeys={[activeKey]} mode="inline" onClick={this.menuclick}>
             <Menu.Item key="1" icon={<PieChartOutlined />}>
               <Link to="/">首页</Link>
             </Menu.Item>
